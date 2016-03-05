@@ -7,14 +7,16 @@ public class ContactData {
     private final String address;
     private final String homephone;
     private final String mobilephone;
+    private String group;
 
-    public ContactData(String firstname, String lastname, String company, String address, String homephone, String mobilephone) {
+    public ContactData(String firstname, String lastname, String company, String address, String homephone, String mobilephone, String group) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.company = company;
         this.address = address;
         this.homephone = homephone;
         this.mobilephone = mobilephone;
+        this.group = group;
     }
 
     public String getFirstname() {
@@ -39,5 +41,9 @@ public class ContactData {
 
     public String getMobilephone() {
         return mobilephone;
+    }
+
+    public String getGroup() {
+        return group;
     }
 }
