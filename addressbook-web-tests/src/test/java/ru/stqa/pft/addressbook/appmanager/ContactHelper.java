@@ -11,6 +11,8 @@ import ru.stqa.pft.addressbook.model.ContactData;
  */
 public class ContactHelper extends HelperBase {
 
+    private NavigationHelper navigation = new NavigationHelper(wd);
+
     public ContactHelper(WebDriver wd) {
         super(wd);
     }
@@ -54,10 +56,11 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form[1]/input[22]"));
     }
 
-    public void createContact(ContactData contact, boolean b) {
-        fillContactForm(contact, b);
+    public void createContact(ContactData contact, boolean creationFlag) {
+        navigation.gotoAddNewPage();
+        fillContactForm(contact, creationFlag);
         submitContact();
-
+        navigation.gotoHome();
     }
 
 
