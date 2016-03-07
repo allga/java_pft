@@ -53,12 +53,4 @@ public class ContactHelper extends HelperBase {
     public void submitContactModification() {
         click(By.xpath("//div[@id='content']/form[1]/input[22]"));
     }
-
-    public void createContact(ContactData contact, boolean b) {
-        fillContactForm(new ContactData("Ivan", "Ivanov", "Noosphere", "Shevchenko, 59", "56-373-22-89", "50-362-85-96", "test1"), true);
-        submitContact();
-
-    }
-
-
 }
