@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -19,10 +20,17 @@ public class ContactModificationTests extends TestBase {
         }
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().selectContactModification(before.size() - 1);
-        app.getContactHelper().fillContactForm(new ContactData("Petr", "Petrov", "Idea", null, null, null, null), false);
+        ContactData contact = new ContactData(before.get(before.size() - 1).getId(), "Petr", "Petrov", "Idea", "Shevchenko, 59", null, null, null);
+        app.getContactHelper().fillContactForm(contact, false);
         app.getContactHelper().submitContactModification();
         app.getNavigationHelper().gotoHome();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size());
+
+        before.remove(before.size() - 1);
+        before.add(contact);
+        System.out.println(before.toString());
+        System.out.println(after.toString());
+        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     }
 }
