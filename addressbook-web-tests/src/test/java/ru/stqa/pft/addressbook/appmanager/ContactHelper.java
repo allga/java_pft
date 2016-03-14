@@ -42,7 +42,6 @@ public class ContactHelper extends HelperBase {
 
     public void selectContact(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
-//        click(By.name("selected[]"));
     }
 
     public void deleteSelectedContact() {
@@ -82,7 +81,7 @@ public class ContactHelper extends HelperBase {
         List<WebElement> elements = wd.findElements(By.name("entry"));
 
         for (WebElement element : elements) {
-            String id = element.findElement(By.xpath(".//input")).getAttribute("id");
+            int id = Integer.parseInt(element.findElement(By.xpath(".//input")).getAttribute("id"));
             String firstname = element.findElement(By.xpath(".//td[3]")).getText();
             String lastname = element.findElement(By.xpath(".//td[2]")).getText();
             String address = element.findElement(By.xpath(".//td[4]")).getText();
