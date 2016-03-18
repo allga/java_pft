@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class ContactDeletionTests extends TestBase {
 
-    @Test (enabled = false)
+    @Test
     public void testContactDeletion() {
         app.getNavigationHelper().gotoHome();
         if (! app.getContactHelper().isThereAContact()) {
