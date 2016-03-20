@@ -17,13 +17,13 @@ public class ContactModificationTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         app.getNavigationHelper().gotoHome();
-        if (! app.getContactHelper().isThereAContact()) {
+        if (app.getContactHelper().getContactList().size() == 0) {
             app.getContactHelper().createContact(new ContactData("Ivan", "Ivanov", "Noosphere", "Shevchenko, 59", "56-373-22-89", "50-362-85-96", "test1"), true);
         }
     }
 
 
-    @Test
+    @Test (enabled = false)
     public void testContactModification() {
         List<ContactData> before = app.getContactHelper().getContactList();
         int index = before.size() - 1;

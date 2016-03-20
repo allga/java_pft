@@ -51,6 +51,13 @@ public class ContactHelper extends HelperBase {
         navigation.gotoHome();
     }
 
+    public void deleteContact(int index) {
+        selectContact(index);
+        deleteSelectedContact();
+        submitContactDeletion();
+        navigation.gotoHome();
+    }
+
 
     public void deleteSelectedContact() {
         click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));

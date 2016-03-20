@@ -16,12 +16,12 @@ public class GroupModificationTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions(){
         app.getNavigationHelper().gotoGroupPage();
-        if (! app.getGroupHelper().isThereAGroup()) {
+        if (app.getGroupHelper().getGroupList().size() == 0) {
             app.getGroupHelper().createGroup(new GroupData("test1", "test2", "test3"));
         }
     }
 
-    @Test
+    @Test (enabled = false)
     public void testGroupModification() {
         List<GroupData> before = app.getGroupHelper().getGroupList();
         int index = before.size() - 1;
