@@ -40,7 +40,6 @@ public class GroupHelper extends HelperBase {
         returnToGroupPage();
     }
 
-
     public void initGroupCreation() {
         click(By.name("new"));
     }
@@ -74,7 +73,6 @@ public class GroupHelper extends HelperBase {
         returnToGroupPage();
     }
 
-
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
     }
@@ -89,8 +87,7 @@ public class GroupHelper extends HelperBase {
         for (WebElement element : elements) {
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            GroupData group = new GroupData(id, name, null, null);
-            groups.add(group);
+            groups.add(new GroupData().setId(id).setName(name));
         }
         return groups;
     }
