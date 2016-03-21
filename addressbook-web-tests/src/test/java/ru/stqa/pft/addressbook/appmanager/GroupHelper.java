@@ -3,10 +3,8 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,8 +32,8 @@ public class GroupHelper extends HelperBase {
         type(By.name("group_footer"), groupData.getFooter());
     }
 
-    public void modifyGroup(int index, GroupData group) {
-        selectGroup(index);
+    public void modifyGroup(GroupData group) {
+        selectGroupById(group.getId());
         initGroupModification();
         fillGroupForm(group);
         submitGroupModification();
@@ -48,10 +46,6 @@ public class GroupHelper extends HelperBase {
 
     public void deleteSelectedGroups() {
         click(By.name("delete"));
-    }
-
-    public void selectGroup(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void selectGroupById(int id) {
@@ -81,17 +75,6 @@ public class GroupHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<GroupData> getGroupList() {
-        List<GroupData> groups = new ArrayList<GroupData>();
-        List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-        for (WebElement element : elements) {
-            String name = element.getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            groups.add(new GroupData().setId(id).setName(name));
-        }
-        return groups;
-    }
-
     public Set<GroupData> getAllGroups() {
         Set<GroupData> groups = new HashSet<GroupData>(); // Создание множества элементов типа GroupData.
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
@@ -101,12 +84,6 @@ public class GroupHelper extends HelperBase {
             groups.add(new GroupData().setId(id).setName(name));
         }
         return groups;
-    }
-
-    public void deleteGroup(int index) {
-        selectGroup(index);
-        deleteSelectedGroups();
-        returnToGroupPage();
     }
 
     public void deleteGroup(GroupData group) {
