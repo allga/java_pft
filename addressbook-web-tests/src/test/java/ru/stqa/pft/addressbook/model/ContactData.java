@@ -1,36 +1,53 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
-
-    private int id;
-    private final String firstname;
-    private final String lastname;
-    private final String company;
-    private final String address;
-    private final String homephone;
-    private final String mobilephone;
+    private int id = Integer.MAX_VALUE;
+    private String firstname;
+    private String lastname;
+    private String company;
+    private String address;
+    private String homephone;
+    private String mobilephone;
     private String group;
 
-    public ContactData(int id, String firstname, String lastname, String company, String address, String homephone, String mobilephone, String group) {
+    public ContactData setId(int id) {
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.company = company;
-        this.address = address;
-        this.homephone = homephone;
-        this.mobilephone = mobilephone;
-        this.group = group;
+        return this;
     }
 
-    public ContactData(String firstname, String lastname, String company, String address, String homephone, String mobilephone, String group) {
-        this.id = Integer.MAX_VALUE;
+    public ContactData setFirstname(String firstname) {
         this.firstname = firstname;
+        return this;
+    }
+
+    public ContactData setLastname(String lastname) {
         this.lastname = lastname;
+        return this;
+    }
+
+    public ContactData setCompany(String company) {
         this.company = company;
+        return this;
+    }
+
+    public ContactData setAddress(String address) {
         this.address = address;
+        return this;
+    }
+
+    public ContactData setHomephone(String homephone) {
         this.homephone = homephone;
+        return this;
+    }
+
+    public ContactData setMobilephone(String mobilephone) {
         this.mobilephone = mobilephone;
+        return this;
+    }
+
+    public ContactData setGroup(String group) {
         this.group = group;
+        return this;
     }
 
     public int getId() {
@@ -96,9 +113,5 @@ public class ContactData {
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         return result;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

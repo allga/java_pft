@@ -11,11 +11,13 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
-  @Test (enabled = false)
+  @Test (enabled = true)
   public void testContactCreation() throws Exception {
     app.getNavigationHelper().gotoHome();
     List<ContactData> before = app.getContactHelper().getContactList();
-    ContactData contact = new ContactData("Leonid", "Ivanov", "Noosphere", "Shevchenko, 59", "56-373-22-89", "50-362-85-96", "test1");
+    ContactData contact = new ContactData().
+            setFirstname("Leonid").setLastname("Ivanov").setCompany("Noosphere").setAddress("Shevchenko, 59").
+            setHomephone("56-373-22-89").setMobilephone("50-362-85-96").setGroup("test1");
     app.getContactHelper().createContact(contact, true);
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() + 1);

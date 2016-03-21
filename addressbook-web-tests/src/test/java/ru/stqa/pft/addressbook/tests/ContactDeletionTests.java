@@ -16,11 +16,13 @@ public class ContactDeletionTests extends TestBase {
     public void ensurePreconditions() {
         app.getNavigationHelper().gotoHome();
         if (app.getContactHelper().getContactList().size() == 0) {
-            app.getContactHelper().createContact(new ContactData("Ivan", "Ivanov", "Noosphere", "Shevchenko, 59", "56-373-22-89", "50-362-85-96", "test1"), true);
+            app.getContactHelper().createContact(new ContactData().setFirstname("Ivan").setLastname("Ivanov").
+                    setCompany("Noosphere").setAddress("Shevchenko, 59").
+                    setHomephone("56-373-22-89").setMobilephone("50-362-85-96").setGroup("test1"), true);
         }
     }
 
-    @Test (enabled = false)
+    @Test (enabled = true)
     public void testContactDeletion() {
         List<ContactData> before = app.getContactHelper().getContactList();
         int index = before.size() - 1;
