@@ -19,7 +19,7 @@ public class ContactCreationTests extends TestBase {
             setFirstname("Leonid").setLastname("Ivanov").setCompany("Noosphere").setAddress("Shevchenko, 59").
             setHomephone("56-373-22-89").setMobilephone("50-362-85-96").setGroup("test1");
     app.getContactHelper().createContact(contact, true);
-    Set<ContactData> after = app.getContactHelper().getAllContacts();
+    Contacts after = app.getContactHelper().getAllContacts();
     assertThat(after.size(), equalTo(before.size() + 1));
 
     assertThat(after, equalTo(
