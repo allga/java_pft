@@ -1,28 +1,26 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 
 public class GroupCreationTests extends TestBase {
 
     @Test (enabled = true)
     public void testGroupCreation() {
         app.getNavigationHelper().gotoGroupPage();
-        Set<GroupData> before = app.getGroupHelper().getAllGroups();
+        Groups before = app.getGroupHelper().getAllGroups();
         GroupData group = new GroupData().setName("test1").setHeader("test2").setFooter("test3");
         app.getGroupHelper().createGroup(group);
-        Set<GroupData> after = app.getGroupHelper().getAllGroups();
-        Assert.assertEquals(after.size(), before.size() + 1);
+        Groups after = app.getGroupHelper().getAllGroups();
+        assertThat(after.size(), equalTo(before.size() + 1));
 
-        //получаем из потока список идентификаторов, ищем максимальный и преобразуем его в int
-        group.setId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
-        before.add(group);
-        Assert.assertEquals(before, after);
+        //получаем из потока список идентификаторов, ищем максимальный и преобразуем его в int, потом сравниваем копии множеств
+        assertThat(after, equalTo(
+                before.withAdded(group.setId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
 
 }
