@@ -24,6 +24,17 @@ public class ContactCreationTests extends TestBase {
             before.withAdded(contact.setId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 
+  @Test (enabled = false)
+  public void testContactMultyCreation() throws Exception {
+    for (int i = 0; i < 100; i++) {
+      app.getNavigationHelper().gotoHome();
+      ContactData contact = new ContactData().
+              setFirstname("Semen" + i).setLastname("Ivanov" + i).setCompany("Noosphere").setAddress("Shevchenko, 59").
+              setHomephone("56-373-22-89").setMobilephone("50-362-85-96").setGroup("test1");
+      app.getContactHelper().createContact(contact, true);
+
+    }
+  }
 
 
 }
