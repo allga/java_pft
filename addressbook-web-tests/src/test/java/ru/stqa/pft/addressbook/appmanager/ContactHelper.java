@@ -114,8 +114,26 @@ public class ContactHelper extends HelperBase {
             String firstname = element.findElement(By.xpath(".//td[3]")).getText();
             String lastname = element.findElement(By.xpath(".//td[2]")).getText();
             String address = element.findElement(By.xpath(".//td[4]")).getText();
-            contactCache.add(new ContactData().setId(id).setFirstname(firstname).setLastname(lastname).setAddress(address));
+            String[] phones = element.findElement(By.xpath(".//td[6]")).getText().split("\n"); // разрезаем строку по символу перевода на другую строку
+            contactCache.add(new ContactData().setId(id).setFirstname(firstname).setLastname(lastname).setAddress(address).
+                    setHomephone(phones[0]).setMobilephone(phones[1]).setWorkphone(phones[2]));
         }
         return contactCache;
+    }
+
+    public ContactData infoFromEditForm(ContactData contact) {
+        selectContactModificationById(contact.getId());
+        String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String company = wd.findElement(By.name("company")).getAttribute("value");
+        String address = wd.findElement(By.name("address")).getAttribute("value");
+        String homephone = wd.findElement(By.name("home")).getAttribute("value");
+        String mobilephone = wd.findElement(By.name("mobile")).getAttribute("value");
+        String workphone = wd.findElement(By.name("work")).getAttribute("value");
+        navigation.gotoHomePage();
+
+        return new ContactData().setId(contact.getId()).setFirstname(firstname).setLastname(lastname).
+                setCompany(company).setAddress(address).
+                setHomephone(homephone).setMobilephone(mobilephone).setWorkphone(workphone);
     }
 }
