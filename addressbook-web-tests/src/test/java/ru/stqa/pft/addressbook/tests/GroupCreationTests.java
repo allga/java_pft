@@ -15,12 +15,23 @@ public class GroupCreationTests extends TestBase {
         Groups before = app.getGroupHelper().getAllGroups();
         GroupData group = new GroupData().setName("test1").setHeader("test2").setFooter("test3");
         app.getGroupHelper().createGroup(group);
+        assertThat(app.getGroupHelper().getGroupCount(), equalTo(before.size() + 1));
         Groups after = app.getGroupHelper().getAllGroups();
-        assertThat(after.size(), equalTo(before.size() + 1));
 
         //получаем из потока список идентификаторов, ищем максимальный и преобразуем его в int, потом сравниваем копии множеств
         assertThat(after, equalTo(
                 before.withAdded(group.setId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
 
+    @Test (enabled = true)
+    public void testBadGroupCreation() {
+        app.getNavigationHelper().gotoGroupPage();
+        Groups before = app.getGroupHelper().getAllGroups();
+        GroupData group = new GroupData().setName("test1");
+        app.getGroupHelper().createGroup(group);
+        assertThat(app.getGroupHelper().getGroupCount(), equalTo(before.size()));
+        Groups after = app.getGroupHelper().getAllGroups();
+
+        assertThat(after, equalTo(before));
+    }
 }
