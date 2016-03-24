@@ -84,6 +84,10 @@ public class ContactData {
         return mobilephone;
     }
 
+    public String getWorkphone() {
+        return workphone;
+    }
+
     public String getGroup() {
         return group;
     }
@@ -91,10 +95,15 @@ public class ContactData {
     @Override
     public String toString() {
         return "ContactData{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
+                ", company='" + company + '\'' +
                 ", address='" + address + '\'' +
+                ", homephone='" + homephone + '\'' +
+                ", mobilephone='" + mobilephone + '\'' +
+                ", workphone='" + workphone + '\'' +
+                ", group='" + group + '\'' +
                 '}';
     }
 
