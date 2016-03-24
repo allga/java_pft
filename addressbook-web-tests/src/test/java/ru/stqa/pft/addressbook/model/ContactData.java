@@ -9,8 +9,14 @@ public class ContactData {
     private String homephone;
     private String mobilephone;
     private String workphone;
+    private String allPhones;
     private String group;
 
+    public ContactData setAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+
+    }
 
     public ContactData setWorkphone(String workphone) {
         this.workphone = workphone;
@@ -54,6 +60,10 @@ public class ContactData {
     public ContactData setGroup(String group) {
         this.group = group;
         return this;
+    }
+
+    public String getAllPhones() {
+        return allPhones;
     }
 
     public int getId() {
