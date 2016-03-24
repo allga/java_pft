@@ -23,7 +23,7 @@ public class ContactDeletionTests extends TestBase {
         }
     }
 
-    @Test (enabled = false)
+    @Test (enabled = true)
     public void testContactDeletion() {
         Contacts before = app.getContactHelper().getAllContacts();
         ContactData deletedContact = before.iterator().next();
@@ -34,9 +34,10 @@ public class ContactDeletionTests extends TestBase {
         assertThat(after, equalTo(before.without(deletedContact)));
     }
 
-    @Test (enabled = true)
+    @Test (enabled = false)
     public void testAllContactsDeletion() {
         app.getContactHelper().deleteAllContacts();
+        Contacts after = app.getContactHelper().getAllContacts();
+        assertThat(after.size(), equalTo(0));
     }
-
 }
