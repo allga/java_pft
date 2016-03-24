@@ -11,7 +11,7 @@ public class ContactCreationTests extends TestBase {
 
   @Test (enabled = true)
   public void testContactCreation() throws Exception {
-    app.getNavigationHelper().gotoHome();
+    app.getNavigationHelper().gotoHomePage();
     Contacts before = app.getContactHelper().getAllContacts();
     ContactData contact = new ContactData().
             setFirstname("Leonid").setLastname("Ivanov").setCompany("Noosphere").setAddress("Shevchenko, 59").
@@ -27,7 +27,7 @@ public class ContactCreationTests extends TestBase {
   @Test (enabled = false)
   public void testContactMultyCreation() throws Exception {
     for (int i = 0; i < 100; i++) {
-      app.getNavigationHelper().gotoHome();
+      app.getNavigationHelper().gotoHomePage();
       ContactData contact = new ContactData().
               setFirstname("Semen" + i).setLastname("Ivanov" + i).setCompany("Noosphere").setAddress("Shevchenko, 59").
               setHomephone("56-373-22-89").setMobilephone("50-362-85-96").setGroup("test1");

@@ -8,9 +8,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Olga on 29.02.2016.
@@ -71,7 +69,7 @@ public class ContactHelper extends HelperBase {
         deleteSelectedContact();
         submitContactDeletion();
         contactCache = null;
-        navigation.gotoHome();
+        navigation.gotoHomePage();
     }
 
     public void deleteAllContacts() {
@@ -79,7 +77,7 @@ public class ContactHelper extends HelperBase {
         deleteSelectedContact();
         submitContactDeletion();
         contactCache = null;
-        navigation.gotoHome();
+        navigation.gotoHomePage();
     }
 
     public void modifyContact(int id, ContactData contact) {
@@ -87,7 +85,7 @@ public class ContactHelper extends HelperBase {
         fillContactForm(contact, false);
         submitContactModification();
         contactCache = null;
-        navigation.gotoHome();
+        navigation.gotoHomePage();
     }
 
     public void createContact(ContactData contact, boolean creationFlag) {
@@ -95,7 +93,7 @@ public class ContactHelper extends HelperBase {
         fillContactForm(contact, creationFlag);
         submitContact();
         contactCache = null;
-        navigation.gotoHome();
+        navigation.gotoHomePage();
     }
 
     public boolean isThereAContact() {

@@ -15,7 +15,7 @@ public class ContactDeletionTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        app.getNavigationHelper().gotoHome();
+        app.getNavigationHelper().gotoHomePage();
         if (app.getContactHelper().getAllContacts().size() == 0) {
             app.getContactHelper().createContact(new ContactData().setFirstname("Ivan").setLastname("Ivanov").
                     setCompany("Noosphere").setAddress("Shevchenko, 59").
