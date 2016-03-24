@@ -14,22 +14,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 public class ViewingContactDataTests extends TestBase {
 
-    @Test (enabled = false)
-    public void testContactAddress() {
+    @Test
+    public void testContactData() {
         app.getNavigationHelper().gotoHomePage();
         ContactData contact = app.getContactHelper().getAllContacts().iterator().next();
         ContactData contactInfoFromEditForm = app.getContactHelper().infoFromEditForm(contact);
 
         assertThat(cleaned(contact.getAddress()), equalTo(cleaned(contactInfoFromEditForm.getAddress())));
-
-    }
-
-    @Test
-    public void testContactEmail() {
-        app.getNavigationHelper().gotoHomePage();
-        ContactData contact = app.getContactHelper().getAllContacts().iterator().next();
-        ContactData contactInfoFromEditForm = app.getContactHelper().infoFromEditForm(contact);
-
         assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
     }
 
