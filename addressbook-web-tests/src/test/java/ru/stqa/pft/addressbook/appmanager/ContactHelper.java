@@ -70,6 +70,7 @@ public class ContactHelper extends HelperBase {
         selectContactByID(contact.getId());
         deleteSelectedContact();
         submitContactDeletion();
+        contactCache = null;
         navigation.gotoHome();
     }
 
@@ -77,6 +78,7 @@ public class ContactHelper extends HelperBase {
         selectAllContacts();
         deleteSelectedContact();
         submitContactDeletion();
+        contactCache = null;
         navigation.gotoHome();
     }
 
@@ -84,6 +86,7 @@ public class ContactHelper extends HelperBase {
         selectContactModificationById(id);
         fillContactForm(contact, false);
         submitContactModification();
+        contactCache = null;
         navigation.gotoHome();
     }
 
@@ -91,6 +94,7 @@ public class ContactHelper extends HelperBase {
         navigation.gotoAddNewPage();
         fillContactForm(contact, creationFlag);
         submitContact();
+        contactCache = null;
         navigation.gotoHome();
     }
 
@@ -98,8 +102,13 @@ public class ContactHelper extends HelperBase {
        return isElementPresent(By.name("selected[]"));
     }
 
+    private Contacts contactCache = null;
+
     public Contacts getAllContacts() {
-        Contacts contacts = new Contacts();
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
 
         for (WebElement element : elements) {
@@ -107,8 +116,8 @@ public class ContactHelper extends HelperBase {
             String firstname = element.findElement(By.xpath(".//td[3]")).getText();
             String lastname = element.findElement(By.xpath(".//td[2]")).getText();
             String address = element.findElement(By.xpath(".//td[4]")).getText();
-            contacts.add(new ContactData().setId(id).setFirstname(firstname).setLastname(lastname).setAddress(address));
+            contactCache.add(new ContactData().setId(id).setFirstname(firstname).setLastname(lastname).setAddress(address));
         }
-        return contacts;
+        return contactCache;
     }
 }
