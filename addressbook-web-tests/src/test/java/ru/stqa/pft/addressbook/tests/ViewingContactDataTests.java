@@ -3,6 +3,9 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -17,11 +20,26 @@ public class ViewingContactDataTests extends TestBase {
         ContactData contact = app.getContactHelper().getAllContacts().iterator().next();
         ContactData contactInfoFromEditForm = app.getContactHelper().infoFromEditForm(contact);
 
-        assertThat(cleanedAddress(contact.getAddress()), equalTo(cleanedAddress(contactInfoFromEditForm.getAddress())));
+        assertThat(cleaned(contact.getAddress()), equalTo(cleaned(contactInfoFromEditForm.getAddress())));
 
     }
 
-    public static String cleanedAddress(String address) {
+    @Test
+    public void testContactEmail() {
+        app.getNavigationHelper().gotoHomePage();
+        ContactData contact = app.getContactHelper().getAllContacts().iterator().next();
+        ContactData contactInfoFromEditForm = app.getContactHelper().infoFromEditForm(contact);
+
+        assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
+    }
+
+    private String mergeEmails(ContactData contact) {
+        return Arrays.asList(contact.getEmail1(), contact.getEmail2(), contact.getEmail3()).
+                stream().filter((s) -> ! s.equals("")).map(ViewingContactDataTests::cleaned).
+                collect(Collectors.joining("\n"));
+    }
+
+    public static String cleaned(String address) {
         return address.replaceAll("\\s+", "").replaceAll("\n", " ");
     }
 }

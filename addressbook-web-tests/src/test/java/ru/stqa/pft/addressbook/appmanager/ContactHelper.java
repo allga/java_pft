@@ -114,9 +114,10 @@ public class ContactHelper extends HelperBase {
             String firstname = element.findElement(By.xpath(".//td[3]")).getText();
             String lastname = element.findElement(By.xpath(".//td[2]")).getText();
             String address = element.findElement(By.xpath(".//td[4]")).getText();
+            String allEmails = element.findElement(By.xpath(".//td[5]")).getText();
             String allPhones = element.findElement(By.xpath(".//td[6]")).getText();
             contactCache.add(new ContactData().setId(id).setFirstname(firstname).setLastname(lastname).setAddress(address).
-                    setAllPhones(allPhones));
+                    setAllPhones(allPhones).setAllEmails(allEmails));
         }
         return contactCache;
     }
@@ -130,10 +131,14 @@ public class ContactHelper extends HelperBase {
         String homephone = wd.findElement(By.name("home")).getAttribute("value");
         String mobilephone = wd.findElement(By.name("mobile")).getAttribute("value");
         String workphone = wd.findElement(By.name("work")).getAttribute("value");
+        String email1 = wd.findElement(By.name("email")).getAttribute("value");
+        String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String email3 = wd.findElement(By.name("email3")).getAttribute("value");
         navigation.gotoHomePage();
 
         return new ContactData().setId(contact.getId()).setFirstname(firstname).setLastname(lastname).
                 setCompany(company).setAddress(address).
-                setHomephone(homephone).setMobilephone(mobilephone).setWorkphone(workphone);
+                setHomephone(homephone).setMobilephone(mobilephone).setWorkphone(workphone).
+                setEmail1(email1).setEmail2(email2).setEmail3(email3);
     }
 }
