@@ -18,9 +18,7 @@ public class ContactPhoneTests extends TestBase {
     public void TestContactPhones() {
         app.getNavigationHelper().gotoHomePage();
         ContactData contact = app.getContactHelper().getAllContacts().iterator().next();
-        System.out.println(contact);
         ContactData contactInfoFromEditForm = app.getContactHelper().infoFromEditForm(contact);
-        System.out.println(contactInfoFromEditForm.toString());
 
         assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
     }
