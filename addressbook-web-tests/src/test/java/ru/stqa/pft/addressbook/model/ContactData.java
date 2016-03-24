@@ -8,8 +8,14 @@ public class ContactData {
     private String address;
     private String homephone;
     private String mobilephone;
+    private String workphone;
     private String group;
 
+
+    public ContactData setWorkphone(String workphone) {
+        this.workphone = workphone;
+        return this;
+    }
     public ContactData setId(int id) {
         this.id = id;
         return this;
