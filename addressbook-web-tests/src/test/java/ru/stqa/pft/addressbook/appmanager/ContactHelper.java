@@ -27,30 +27,12 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
-    public void fillContactForm(ContactData contact, boolean creation) {
-        type(By.name("firstname"), contact.getFirstname());
-        type(By.name("lastname"), contact.getLastname());
-        type(By.name("company"), contact.getCompany());
-        type(By.name("address"), contact.getAddress());
-        type(By.name("home"), contact.getHomephone());
-        type(By.name("mobile"), contact.getMobilephone());
-
-        if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contact.getGroup());
-        } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
-        }
-     }
-
     private void selectContactByID(int id) {
         wd.findElement(By.xpath(".//*[@id='maintable']/tbody//input[@id='" + id + "']")).click();
     }
 
-    public void deleteContact(ContactData contact) {
-        selectContactByID(contact.getId());
-        deleteSelectedContact();
-        submitContactDeletion();
-        navigation.gotoHome();
+    private void selectAllContacts() {
+        wd.findElement(By.id("MassCB")).click();
     }
 
     public void deleteSelectedContact() {
@@ -67,6 +49,35 @@ public class ContactHelper extends HelperBase {
 
     public void selectContactModificationById(int id) {
         wd.findElement(By.xpath(".//a[@href=\"edit.php?id=" + id + "\"]/img")).click();
+    }
+
+    public void fillContactForm(ContactData contact, boolean creation) {
+        type(By.name("firstname"), contact.getFirstname());
+        type(By.name("lastname"), contact.getLastname());
+        type(By.name("company"), contact.getCompany());
+        type(By.name("address"), contact.getAddress());
+        type(By.name("home"), contact.getHomephone());
+        type(By.name("mobile"), contact.getMobilephone());
+
+        if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contact.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
+    }
+
+    public void deleteContact(ContactData contact) {
+        selectContactByID(contact.getId());
+        deleteSelectedContact();
+        submitContactDeletion();
+        navigation.gotoHome();
+    }
+
+    public void deleteAllContacts() {
+        selectAllContacts();
+        deleteSelectedContact();
+        submitContactDeletion();
+        navigation.gotoHome();
     }
 
     public void modifyContact(int id, ContactData contact) {
