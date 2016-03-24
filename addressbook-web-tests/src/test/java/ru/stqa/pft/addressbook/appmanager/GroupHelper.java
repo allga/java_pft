@@ -27,21 +27,6 @@ public class GroupHelper extends HelperBase {
         click(By.name("submit"));
     }
 
-    public void fillGroupForm(GroupData groupData) {
-        type(By.name("group_name"), groupData.getName());
-        type(By.name("group_header"), groupData.getHeader());
-        type(By.name("group_footer"), groupData.getFooter());
-    }
-
-    public void modifyGroup(GroupData group) {
-        selectGroupById(group.getId());
-        initGroupModification();
-        fillGroupForm(group);
-        submitGroupModification();
-        groupCache = null;
-        returnToGroupPage();
-    }
-
     public void initGroupCreation() {
         click(By.name("new"));
     }
@@ -62,6 +47,20 @@ public class GroupHelper extends HelperBase {
         click(By.name("update"));
     }
 
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    public int getGroupCount() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public void fillGroupForm(GroupData groupData) {
+        type(By.name("group_name"), groupData.getName());
+        type(By.name("group_header"), groupData.getHeader());
+        type(By.name("group_footer"), groupData.getFooter());
+    }
+
     public void createGroup(GroupData group) {
         initGroupCreation();
         fillGroupForm(group);
@@ -70,12 +69,13 @@ public class GroupHelper extends HelperBase {
         returnToGroupPage();
     }
 
-    public boolean isThereAGroup() {
-        return isElementPresent(By.name("selected[]"));
-    }
-
-    public int getGroupCount() {
-        return wd.findElements(By.name("selected[]")).size();
+    public void modifyGroup(GroupData group) {
+        selectGroupById(group.getId());
+        initGroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
+        groupCache = null;
+        returnToGroupPage();
     }
 
     public void deleteGroup(GroupData group) {
