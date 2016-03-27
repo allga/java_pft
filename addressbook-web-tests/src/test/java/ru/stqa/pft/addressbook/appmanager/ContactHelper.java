@@ -47,6 +47,12 @@ public class ContactHelper extends HelperBase {
 
     public void selectContactModificationById(int id) {
         wd.findElement(By.xpath(".//a[@href=\"edit.php?id=" + id + "\"]/img")).click();
+
+    }
+
+    public void selectContactDetailsById(int id) {
+        wd.findElement(By.xpath(".//a[@href=\"view.php?id=" + id + "\"]")).click();
+
     }
 
     public void fillContactForm(ContactData contact, boolean creation) {
@@ -140,5 +146,11 @@ public class ContactHelper extends HelperBase {
                 setCompany(company).setAddress(address).
                 setHomephone(homephone).setMobilephone(mobilephone).setWorkphone(workphone).
                 setEmail1(email1).setEmail2(email2).setEmail3(email3);
+    }
+
+    public ContactData infoFromDetailsPage(ContactData contact) {
+        selectContactDetailsById(contact.getId());
+        String content = wd.findElement(By.id("content")).getText();
+        return new ContactData().setId(contact.getId()).setFirstname(content);
     }
 }
