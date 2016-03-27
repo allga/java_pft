@@ -8,6 +8,8 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -151,6 +153,16 @@ public class ContactHelper extends HelperBase {
     public ContactData infoFromDetailsPage(ContactData contact) {
         selectContactDetailsById(contact.getId());
         String allContent = wd.findElement(By.id("content")).getText();
+        System.out.println(allContent);
+        System.out.println("=====================================");
+        List<WebElement> elements = wd.findElements(By.cssSelector("a[target=\"_new\"]"));
+        for (WebElement element : elements) {
+            String site = String.format("(%s)", element.getText());
+            System.out.println(site);
+            allContent.replaceAll(site, "");
+            System.out.println(allContent);
+            System.out.println("--------------------------------");
+        }
         return new ContactData().setId(contact.getId()).setAllContent(allContent);
     }
 }
