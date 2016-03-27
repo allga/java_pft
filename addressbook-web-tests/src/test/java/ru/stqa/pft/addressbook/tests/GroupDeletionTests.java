@@ -32,4 +32,12 @@ public class GroupDeletionTests extends TestBase {
         assertThat(after, equalTo(before.without(deletedGroup)));
     }
 
+    @Test (enabled = true)
+    public void testAllGroupDeletion() {
+        Groups before = app.getGroupHelper().getAllGroups();
+        for (GroupData gd : before) {
+            app.getGroupHelper().deleteGroup(gd);
+        }
+        assertThat(app.getGroupHelper().getGroupCount(), equalTo(0));
+    }
 }
