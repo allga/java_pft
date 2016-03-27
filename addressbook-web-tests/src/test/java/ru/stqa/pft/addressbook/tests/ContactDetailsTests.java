@@ -21,11 +21,11 @@ public class ContactDetailsTests extends TestBase {
         ContactData contactInfoFromEditForm = app.getContactHelper().infoFromEditForm(contact);
         mergePhones(contactInfoFromEditForm);
         mergeEmails(contactInfoFromEditForm);
-//        System.out.println(mergeContent(contactInfoFromEditForm));
+        System.out.println(mergeContent(contactInfoFromEditForm));
         ContactData contactInfoFromDetailsPage = app.getContactHelper().infoFromDetailsPage(contact);
-//        System.out.println(contactInfoFromDetailsPage.getAllContent().toString());
+        System.out.println(cleaned(contactInfoFromDetailsPage.getAllContent()).toString());
 
-//        assertThat(mergeContent(contactInfoFromEditForm), equalTo(cleaned(contactInfoFromDetailsPage.getAllContent())));
+        assertThat(mergeContent(contactInfoFromEditForm), equalTo(cleaned(contactInfoFromDetailsPage.getAllContent())));
 
     }
 

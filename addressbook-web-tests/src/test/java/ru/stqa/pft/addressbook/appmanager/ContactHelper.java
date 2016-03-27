@@ -153,8 +153,6 @@ public class ContactHelper extends HelperBase {
     public ContactData infoFromDetailsPage(ContactData contact) {
         selectContactDetailsById(contact.getId());
         String allContent = wd.findElement(By.id("content")).getText();
-        System.out.println(allContent);
-        System.out.println("=====================================");
         String content = "";
         List<WebElement> elements = wd.findElements(By.cssSelector("a[target=\"_new\"]"));
         for (WebElement element : elements) {
