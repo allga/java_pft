@@ -155,14 +155,15 @@ public class ContactHelper extends HelperBase {
         String allContent = wd.findElement(By.id("content")).getText();
         System.out.println(allContent);
         System.out.println("=====================================");
+        String content = "";
         List<WebElement> elements = wd.findElements(By.cssSelector("a[target=\"_new\"]"));
         for (WebElement element : elements) {
-            String site = String.format("(%s)", element.getText());
-            System.out.println(site);
-            allContent.replaceAll(site, "");
-            System.out.println(allContent);
-            System.out.println("--------------------------------");
+            String site = element.getText();
+            content = allContent.replaceAll(site, "");
+            allContent = content;
+            content = "";
         }
-        return new ContactData().setId(contact.getId()).setAllContent(allContent);
+        content = allContent.replaceAll("\\(\\)","");
+        return new ContactData().setId(contact.getId()).setAllContent(content);
     }
 }
