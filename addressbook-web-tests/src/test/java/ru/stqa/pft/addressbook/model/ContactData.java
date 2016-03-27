@@ -15,7 +15,16 @@ public class ContactData {
     private String email2;
     private String email3;
     private String allEmails;
+    private String allContent;
 
+    public String getAllContent() {
+        return allContent;
+    }
+
+    public ContactData setAllContent(String allContent) {
+        this.allContent = allContent;
+        return this;
+    }
 
     public String getEmail1() {
         return email1;

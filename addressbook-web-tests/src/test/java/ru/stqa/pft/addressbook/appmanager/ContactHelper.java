@@ -150,7 +150,7 @@ public class ContactHelper extends HelperBase {
 
     public ContactData infoFromDetailsPage(ContactData contact) {
         selectContactDetailsById(contact.getId());
-        String content = wd.findElement(By.id("content")).getText();
-        return new ContactData().setId(contact.getId()).setFirstname(content);
+        String allContent = wd.findElement(By.id("content")).getText();
+        return new ContactData().setId(contact.getId()).setAllContent(allContent);
     }
 }
