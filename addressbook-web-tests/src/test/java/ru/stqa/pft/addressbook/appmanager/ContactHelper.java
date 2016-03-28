@@ -7,10 +7,12 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.tests.ViewingContactDataTests;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Olga on 29.02.2016.
@@ -163,5 +165,28 @@ public class ContactHelper extends HelperBase {
         }
         content = allContent.replaceAll("\\(\\)","");
         return new ContactData().setId(contact.getId()).setAllContent(content);
+    }
+
+
+    public void mergePhones(ContactData contact) {
+        String phone = "";
+        if (!contact.getHomephone().equals("")) {
+            phone += String.format("H:%s", contact.getHomephone());
+        }
+        if (!contact.getMobilephone().equals("")) {
+            phone += String.format("M:%s", contact.getMobilephone());
+        }
+        if (!contact.getWorkphone().equals("")) {
+            phone += String.format("W:%s", contact.getWorkphone());
+        }
+        contact.setAllPhones(phone);
+    }
+
+
+    public void mergeEmails(ContactData contact) {
+        String emailString = Arrays.asList(contact.getEmail1(), contact.getEmail2(), contact.getEmail3()).
+                stream().filter((s) -> ! s.equals("")).map(ViewingContactDataTests::cleaned).
+                collect(Collectors.joining("\n"));
+        contact.setAllEmails(emailString);
     }
 }
