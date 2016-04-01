@@ -7,6 +7,7 @@
     "homephone": "56-373-22-70",
     "mobilephone": "50-362-88-80",
     "workphone": "56-744-99-90",
+    "group": "test1",
     "email1": "email1_0.gmail.com",
     "email2": "email2_0.hotmail.com",
     "email3": "email3_0.yahoo.com"
@@ -19,6 +20,7 @@
     "homephone": "56-373-22-71",
     "mobilephone": "50-362-88-81",
     "workphone": "56-744-99-91",
+    "group": "test1",
     "email1": "email1_1.gmail.com",
     "email2": "email2_1.hotmail.com",
     "email3": "email3_1.yahoo.com"
@@ -31,92 +33,9 @@
     "homephone": "56-373-22-72",
     "mobilephone": "50-362-88-82",
     "workphone": "56-744-99-92",
+    "group": "test1",
     "email1": "email1_2.gmail.com",
     "email2": "email2_2.hotmail.com",
     "email3": "email3_2.yahoo.com"
-  },
-  {
-    "firstname": "Leonid3",
-    "lastname": "Ivanov3",
-    "company": "Noosphere3",
-    "address": "Shevchenko, 53",
-    "homephone": "56-373-22-73",
-    "mobilephone": "50-362-88-83",
-    "workphone": "56-744-99-93",
-    "email1": "email1_3.gmail.com",
-    "email2": "email2_3.hotmail.com",
-    "email3": "email3_3.yahoo.com"
-  },
-  {
-    "firstname": "Leonid4",
-    "lastname": "Ivanov4",
-    "company": "Noosphere4",
-    "address": "Shevchenko, 54",
-    "homephone": "56-373-22-74",
-    "mobilephone": "50-362-88-84",
-    "workphone": "56-744-99-94",
-    "email1": "email1_4.gmail.com",
-    "email2": "email2_4.hotmail.com",
-    "email3": "email3_4.yahoo.com"
-  },
-  {
-    "firstname": "Leonid5",
-    "lastname": "Ivanov5",
-    "company": "Noosphere5",
-    "address": "Shevchenko, 55",
-    "homephone": "56-373-22-75",
-    "mobilephone": "50-362-88-85",
-    "workphone": "56-744-99-95",
-    "email1": "email1_5.gmail.com",
-    "email2": "email2_5.hotmail.com",
-    "email3": "email3_5.yahoo.com"
-  },
-  {
-    "firstname": "Leonid6",
-    "lastname": "Ivanov6",
-    "company": "Noosphere6",
-    "address": "Shevchenko, 56",
-    "homephone": "56-373-22-76",
-    "mobilephone": "50-362-88-86",
-    "workphone": "56-744-99-96",
-    "email1": "email1_6.gmail.com",
-    "email2": "email2_6.hotmail.com",
-    "email3": "email3_6.yahoo.com"
-  },
-  {
-    "firstname": "Leonid7",
-    "lastname": "Ivanov7",
-    "company": "Noosphere7",
-    "address": "Shevchenko, 57",
-    "homephone": "56-373-22-77",
-    "mobilephone": "50-362-88-87",
-    "workphone": "56-744-99-97",
-    "email1": "email1_7.gmail.com",
-    "email2": "email2_7.hotmail.com",
-    "email3": "email3_7.yahoo.com"
-  },
-  {
-    "firstname": "Leonid8",
-    "lastname": "Ivanov8",
-    "company": "Noosphere8",
-    "address": "Shevchenko, 58",
-    "homephone": "56-373-22-78",
-    "mobilephone": "50-362-88-88",
-    "workphone": "56-744-99-98",
-    "email1": "email1_8.gmail.com",
-    "email2": "email2_8.hotmail.com",
-    "email3": "email3_8.yahoo.com"
-  },
-  {
-    "firstname": "Leonid9",
-    "lastname": "Ivanov9",
-    "company": "Noosphere9",
-    "address": "Shevchenko, 59",
-    "homephone": "56-373-22-79",
-    "mobilephone": "50-362-88-89",
-    "workphone": "56-744-99-99",
-    "email1": "email1_9.gmail.com",
-    "email2": "email2_9.hotmail.com",
-    "email3": "email3_9.yahoo.com"
   }
 ]

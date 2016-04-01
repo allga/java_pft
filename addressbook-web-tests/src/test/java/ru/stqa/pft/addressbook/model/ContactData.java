@@ -29,6 +29,7 @@ public class ContactData {
 
     private String allPhones;
 
+    @Expose
     private String group;
 
     @Expose

@@ -82,7 +82,8 @@ public class ContactDataGenerator {
                     setWorkphone(String.format("56-744-99-9%s", i)).
                     setEmail1(String.format("email1_%s.gmail.com", i)).
                     setEmail2(String.format("email2_%s.hotmail.com", i)).
-                    setEmail3(String.format("email3_%s.yahoo.com", i)));
+                    setEmail3(String.format("email3_%s.yahoo.com", i)).
+                    setGroup("test1"));
         }
         return contacts;
     }

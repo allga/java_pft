@@ -66,6 +66,10 @@ public class ContactHelper extends HelperBase {
         type(By.name("address"), contact.getAddress());
         type(By.name("home"), contact.getHomephone());
         type(By.name("mobile"), contact.getMobilephone());
+        type(By.name("work"), contact.getWorkphone());
+        type(By.name("email"), contact.getEmail1());
+        type(By.name("email2"), contact.getEmail2());
+        type(By.name("email3"), contact.getEmail3());
         attach(By.name("photo"), contact.getPhoto());
 
 
