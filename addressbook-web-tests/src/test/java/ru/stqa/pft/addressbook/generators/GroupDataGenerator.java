@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.generators;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+import com.beust.jcommander.ParameterException;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.io.File;
@@ -24,10 +25,14 @@ public class GroupDataGenerator {
 
     public static void main(String[] args) throws IOException {
         GroupDataGenerator generator = new GroupDataGenerator();
-        new JCommander(generator);
+        JCommander jCommander = new JCommander(generator);
+        try {
+            jCommander.parse(args);
+        } catch (ParameterException ex) {
+            jCommander.usage();
+            return;
+        }
         generator.run();
-        int count = Integer.parseInt(args[0]);
-        File file = new File(args[1]);
     }
 
     private void run() throws IOException {
@@ -36,7 +41,6 @@ public class GroupDataGenerator {
     }
 
     private void save(List<GroupData> groups, File file) throws IOException {
-        System.out.println(new File(".").getAbsolutePath());
         Writer writer = new FileWriter(file);
         for (GroupData group : groups) {
             writer.write(String.format("%s;%s;%s\n", group.getName(), group.getHeader(), group.getFooter()));
