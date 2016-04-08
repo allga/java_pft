@@ -24,20 +24,17 @@ public class DbConnectionTest {
             ResultSet resultSet = st.executeQuery("select group_id, group_name, group_header, group_footer from group_list");
 
             Groups groups = new Groups();
-            
+
             // пробегаем по множеству результатов, каждый шаг resultSet - это указатель на одну строку таблицы
             while (resultSet.next()) {
-            groups.add(new GroupData().setId(resultSet.getInt("group_id")).setName(resultSet.getString("group_name")).
-                    setHeader(resultSet.getString("group_header")).setFooter(resultSet.getString("group_footer")));
-        }
+                groups.add(new GroupData().setId(resultSet.getInt("group_id")).setName(resultSet.getString("group_name")).
+                        setHeader(resultSet.getString("group_header")).setFooter(resultSet.getString("group_footer")));
+            }
             resultSet.close();
             st.close();
             conn.close();
 
             System.out.println(groups);
-
-            // Do something with the Connection
-
         } catch (SQLException ex) {
             // handle any errors
             System.out.println("SQLException: " + ex.getMessage());
