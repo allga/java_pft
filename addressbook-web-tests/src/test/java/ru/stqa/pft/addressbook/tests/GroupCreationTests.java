@@ -38,10 +38,10 @@ public class GroupCreationTests extends TestBase {
     @Test(dataProvider = "validGroups")
     public void testGroupCreation(GroupData group) {
         app.getNavigationHelper().gotoGroupPage();
-        Groups before = app.getGroupHelper().getAllGroups();
+        Groups before = app.getDbHelper().groups();
         app.getGroupHelper().createGroup(group);
         assertThat(app.getGroupHelper().getGroupCount(), equalTo(before.size() + 1));
-        Groups after = app.getGroupHelper().getAllGroups();
+        Groups after = app.getDbHelper().groups();
 
         //получаем из потока список идентификаторов, ищем максимальный и преобразуем его в int, потом сравниваем копии множеств
         assertThat(after, equalTo(
