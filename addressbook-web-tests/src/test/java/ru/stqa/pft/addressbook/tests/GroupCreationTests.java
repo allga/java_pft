@@ -46,6 +46,8 @@ public class GroupCreationTests extends TestBase {
         //получаем из потока список идентификаторов, ищем максимальный и преобразуем его в int, потом сравниваем копии множеств
         assertThat(after, equalTo(
                 before.withAdded(group.setId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+
+        verifyGroupListInUI();
     }
 
     // тест на проверку создания "неправильной" группы
