@@ -84,7 +84,11 @@ public class ContactData {
     }
 
     public File getPhoto() {
-        return new File(photo);
+        try {
+            return new File(photo);
+        } catch (NullPointerException ex) {
+            return null;
+        }
     }
 
     public String getAllContent() {
@@ -233,12 +237,11 @@ public class ContactData {
                 ", homephone='" + homephone + '\'' +
                 ", mobilephone='" + mobilephone + '\'' +
                 ", workphone='" + workphone + '\'' +
-                ", allPhones='" + allPhones + '\'' +
                 ", group='" + group + '\'' +
                 ", email1='" + email1 + '\'' +
                 ", email2='" + email2 + '\'' +
                 ", email3='" + email3 + '\'' +
-                ", allEmails='" + allEmails + '\'' +
+                ", photo='" + photo + '\'' +
                 '}';
     }
 
@@ -252,7 +255,14 @@ public class ContactData {
         if (id != that.id) return false;
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
         if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
-        return address != null ? address.equals(that.address) : that.address == null;
+        if (company != null ? !company.equals(that.company) : that.company != null) return false;
+        if (address != null ? !address.equals(that.address) : that.address != null) return false;
+        if (homephone != null ? !homephone.equals(that.homephone) : that.homephone != null) return false;
+        if (mobilephone != null ? !mobilephone.equals(that.mobilephone) : that.mobilephone != null) return false;
+        if (workphone != null ? !workphone.equals(that.workphone) : that.workphone != null) return false;
+        if (email1 != null ? !email1.equals(that.email1) : that.email1 != null) return false;
+        if (email2 != null ? !email2.equals(that.email2) : that.email2 != null) return false;
+        return email3 != null ? email3.equals(that.email3) : that.email3 == null;
 
     }
 
@@ -261,7 +271,14 @@ public class ContactData {
         int result = id;
         result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (company != null ? company.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (homephone != null ? homephone.hashCode() : 0);
+        result = 31 * result + (mobilephone != null ? mobilephone.hashCode() : 0);
+        result = 31 * result + (workphone != null ? workphone.hashCode() : 0);
+        result = 31 * result + (email1 != null ? email1.hashCode() : 0);
+        result = 31 * result + (email2 != null ? email2.hashCode() : 0);
+        result = 31 * result + (email3 != null ? email3.hashCode() : 0);
         return result;
     }
 }

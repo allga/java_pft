@@ -2,6 +2,7 @@ package ru.stqa.pft.addressbook.model;
 
 import com.google.common.collect.ForwardingSet;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -33,6 +34,9 @@ public class Contacts extends ForwardingSet<ContactData> {
 
     public Contacts withAdded(ContactData contact) {
         Contacts contacts = new Contacts(this);
+        if (contact.getPhoto() == null) {
+            contact.setPhoto(new File(""));
+        }
         contacts.add(contact);
         return contacts;
     }

@@ -2,7 +2,6 @@ package ru.stqa.pft.addressbook.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -42,42 +41,34 @@ public class ContactCreationTests extends TestBase {
     @Test(dataProvider = "validContacts")
     public void testContactCreation(ContactData contact) throws Exception {
         app.getNavigationHelper().gotoHomePage();
-        Contacts before = app.getContactHelper().getAllContacts();
+        Contacts before = app.getDbHelper().contacts();
 
         app.getContactHelper().createContact(contact, true);
 
-        Contacts after = app.getContactHelper().getAllContacts();
+        Contacts after = app.getDbHelper().contacts();
         assertThat(after.size(), equalTo(before.size() + 1));
 
         assertThat(after, equalTo(
                 before.withAdded(contact.setId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void testContactCreationWithData() throws Exception {
         app.getNavigationHelper().gotoHomePage();
-        Contacts before = app.getContactHelper().getAllContacts();
+        Contacts before = app.getDbHelper().contacts();
         File photo = new File("src/test/resources/photo0.jpg");
         ContactData contact = new ContactData().
                 setFirstname("Leonid").setLastname("Ivanov").setCompany("Noosphere").setAddress("Shevchenko, 59").
-                setHomephone("56-373-22-89").setMobilephone("50-362-85-96").setPhoto(photo).setGroup("test1");
+                setHomephone("56-373-22-89").setMobilephone("50-362-85-96").setWorkphone("56-362-85-11").
+                setEmail1("email1@gmail.com").
+                setEmail2("email2@gmail.com").
+                setEmail3("email3@gmail.com").
+                setPhoto(photo).setGroup("test1");
         app.getContactHelper().createContact(contact, true);
-        Contacts after = app.getContactHelper().getAllContacts();
+        Contacts after = app.getDbHelper().contacts();
         assertThat(after.size(), equalTo(before.size() + 1));
 
         assertThat(after, equalTo(
                 before.withAdded(contact.setId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-    }
-
-    @Test(enabled = false)
-    public void testContactMultyCreation() throws Exception {
-        for (int i = 0; i < 100; i++) {
-            app.getNavigationHelper().gotoHomePage();
-            ContactData contact = new ContactData().
-                    setFirstname("Semen" + i).setLastname("Ivanov" + i).setCompany("Noosphere").setAddress("Shevchenko, 59").
-                    setHomephone("56-373-22-89").setMobilephone("50-362-85-96").setGroup("test1");
-            app.getContactHelper().createContact(contact, true);
-
-        }
     }
 }
