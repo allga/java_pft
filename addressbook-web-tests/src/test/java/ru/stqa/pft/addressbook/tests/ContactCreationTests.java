@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -53,6 +54,29 @@ public class ContactCreationTests extends TestBase {
     }
 
     @Test(enabled = true)
+    public void testContactCreationWithGroup() throws Exception {
+        Groups groups = app.getDbHelper().groups();
+        File photo = new File("src/test/resources/photo0.jpg");
+        ContactData contact = new ContactData().
+                setFirstname("Leonid").setLastname("Ivanov").setCompany("Noosphere").setAddress("Shevchenko, 59").
+                setHomephone("56-373-22-89").setMobilephone("50-362-85-96").setWorkphone("56-362-85-11").
+                setEmail1("email1@gmail.com").
+                setEmail2("email2@gmail.com").
+                setEmail3("email3@gmail.com").
+                setPhoto(photo).
+                inGroup(groups.iterator().next());
+        app.getNavigationHelper().gotoHomePage();
+        Contacts before = app.getDbHelper().contacts();
+        app.getContactHelper().createContact(contact, true);
+        Contacts after = app.getDbHelper().contacts();
+        assertThat(after.size(), equalTo(before.size() + 1));
+
+        assertThat(after, equalTo(
+                before.withAdded(contact.setId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+    }
+
+
+    @Test(enabled = true)
     public void testContactCreationWithData() throws Exception {
         app.getNavigationHelper().gotoHomePage();
         Contacts before = app.getDbHelper().contacts();
@@ -63,7 +87,8 @@ public class ContactCreationTests extends TestBase {
                 setEmail1("email1@gmail.com").
                 setEmail2("email2@gmail.com").
                 setEmail3("email3@gmail.com").
-                setPhoto(photo).setGroup("test1");
+//                setGroup("test1").
+                setPhoto(photo);
         app.getContactHelper().createContact(contact, true);
         Contacts after = app.getDbHelper().contacts();
         assertThat(after.size(), equalTo(before.size() + 1));

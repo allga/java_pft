@@ -19,7 +19,9 @@ public class ContactDeletionTests extends TestBase {
         if (app.getContactHelper().getAllContacts().size() == 0) {
             app.getContactHelper().createContact(new ContactData().setFirstname("Ivan").setLastname("Ivanov").
                     setCompany("Noosphere").setAddress("Shevchenko, 59").
-                    setHomephone("56-373-22-89").setMobilephone("50-362-85-96").setGroup("test1"), true);
+                    setHomephone("56-373-22-89").setMobilephone("50-362-85-96")
+//                    .setGroup("test1")
+                    , true);
         }
     }
 

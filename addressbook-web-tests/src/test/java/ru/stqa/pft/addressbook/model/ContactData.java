@@ -5,6 +5,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity //сущность, для привязки к БД
 @Table(name = "addressbook")
@@ -50,10 +52,6 @@ public class ContactData {
     private String allPhones;
 
     @Expose
-    @Transient
-    private String group;
-
-    @Expose
     @Column(name = "email")
     @Type(type = "text")
     private String email1;
@@ -78,6 +76,11 @@ public class ContactData {
     @Type(type = "text")
     private String photo;
 
+    @ManyToMany
+    @JoinTable(name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
+
     public ContactData setPhoto(File photo) {
         this.photo = photo.getPath();
         return this;
@@ -89,6 +92,10 @@ public class ContactData {
         } catch (NullPointerException ex) {
             return null;
         }
+    }
+
+    public Groups getGroups() {
+        return new Groups(groups);
     }
 
     public String getAllContent() {
@@ -181,11 +188,6 @@ public class ContactData {
         return this;
     }
 
-    public ContactData setGroup(String group) {
-        this.group = group;
-        return this;
-    }
-
     public String getAllPhones() {
         return allPhones;
     }
@@ -222,10 +224,6 @@ public class ContactData {
         return workphone;
     }
 
-    public String getGroup() {
-        return group;
-    }
-
     @Override
     public String toString() {
         return "ContactData{" +
@@ -237,7 +235,6 @@ public class ContactData {
                 ", homephone='" + homephone + '\'' +
                 ", mobilephone='" + mobilephone + '\'' +
                 ", workphone='" + workphone + '\'' +
-                ", group='" + group + '\'' +
                 ", email1='" + email1 + '\'' +
                 ", email2='" + email2 + '\'' +
                 ", email3='" + email3 + '\'' +
@@ -280,5 +277,10 @@ public class ContactData {
         result = 31 * result + (email2 != null ? email2.hashCode() : 0);
         result = 31 * result + (email3 != null ? email3.hashCode() : 0);
         return result;
+    }
+
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
     }
 }
