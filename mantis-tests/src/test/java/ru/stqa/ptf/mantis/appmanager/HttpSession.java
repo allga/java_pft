@@ -50,10 +50,9 @@ public class HttpSession {
 
         //получение текста ответа на языке html
         String body = getTextFrom(response);
-        System.out.println(body);
 
         // проверка, залогинился ли пользователь
-        return body.contains(String.format("<span class=\"italic\">%s</spain>", username));
+        return body.contains(String.format("<span class=\"italic\">%s</span>", username));
 
     }
 
@@ -77,7 +76,7 @@ public class HttpSession {
         String body = getTextFrom(response);
 
         //проверяем что мы залогинены юзером username
-        return body.contains(String.format("<span class=\"italic\">%s</spain>", username));
+        return body.contains(String.format("<span class=\"italic\">%s</span>", username));
     }
 
 }
