@@ -22,6 +22,8 @@ public class ApplicationManager {
     private String browser;
     //создаем поле чтоб организовать ленивую инициализацию
     private RegistrationHelper registrationHelper;
+    //создаем поле чтоб организовать ленивую инициализацию
+    private FtpHelper ftpHelper;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -64,6 +66,17 @@ public class ApplicationManager {
             registrationHelper = new RegistrationHelper(this);
         }
         return registrationHelper;
+    }
+
+    //метод возвращает объект типа FtpHelper, для обращения к FtpHelper через ApplicationManager
+    public FtpHelper ftp() {
+        //инициализируем FtpHelper только при первом обращении к этому методу
+        if (ftpHelper == null) {
+            //передаем хелперу ссылку на ApplicationManager
+            // ApplicationManager нанимает помощника и передает ему ссылку на самого себя
+            ftpHelper = new FtpHelper(this);
+        }
+        return ftpHelper;
     }
 
     //делаем ленивую инициализацию драйвера в момент первого обращения
