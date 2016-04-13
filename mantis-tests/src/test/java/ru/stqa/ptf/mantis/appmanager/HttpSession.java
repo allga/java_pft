@@ -20,11 +20,11 @@ import java.util.List;
  */
 public class HttpSession {
 
-    private final ApplicationManager appManager;
+    private final ApplicationManager app;
     private final CloseableHttpClient httpclient;
 
     public HttpSession(ApplicationManager applicationManager) {
-        this.appManager = applicationManager;
+        this.app = applicationManager;
         //создание нового клиента - новой сессии для работы по протоколу http, он будет отправлять запросы к серверу
         httpclient = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
         // setRedirectStrategy - установка стратегии перенаправлений,
@@ -33,7 +33,8 @@ public class HttpSession {
     }
 
     public boolean login(String username, String password) throws IOException {
-        HttpPost post = new HttpPost(appManager.getProperty("web.baseUrl") + "/login.php"); //создаем post запрос
+        // у ApplicationManager получаем значение св-ва web.baseUrl конфигурационного файла и формируем адрес страницы логина
+        HttpPost post = new HttpPost(app.getProperty("web.baseUrl") + "/login.php"); //создаем пустой post запрос
 
         //формируем набор параметров запросаб см. параметры запроса в фаэрбаге
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -67,7 +68,7 @@ public class HttpSession {
 
     public boolean isLoggedInAs(String username) throws IOException {
         //отправляем get запрос, чтоб перейти на /index.php
-        HttpGet get = new HttpGet(appManager.getProperty("web.baseUrl") + "/index.php");
+        HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/index.php");
 
         //получает ответ с html кодом страницы
         CloseableHttpResponse response = httpclient.execute(get);
