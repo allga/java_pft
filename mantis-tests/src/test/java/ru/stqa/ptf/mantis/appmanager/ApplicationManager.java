@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Olga on 29.02.2016.
  */
 public class ApplicationManager {
+
     private final Properties properties;
     //делаем private чтоб никто случайно не обратился к драйверу
     private WebDriver driver;
@@ -24,6 +25,9 @@ public class ApplicationManager {
     private RegistrationHelper registrationHelper;
     //создаем поле чтоб организовать ленивую инициализацию
     private FtpHelper ftpHelper;
+    //создаем поле чтоб организовать ленивую инициализацию
+    private MailHelper mailHelper;
+
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -59,13 +63,24 @@ public class ApplicationManager {
 
     //метод возвращает объект типа RegistrationHelper, для обращения к RegistrationHelper через ApplicationManager
     public RegistrationHelper registration() {
-        //инициализируем registrationHelper только при первом обращении к этому методу
+        //инициализируем RegistrationHelper только при первом обращении к этому методу
         if (registrationHelper == null) {
             //передаем хелперу ссылку на ApplicationManager
             // ApplicationManager нанимает помощника и передает ему ссылку на самого себя
             registrationHelper = new RegistrationHelper(this);
         }
         return registrationHelper;
+    }
+
+    //метод возвращает объект типа MailHelper, для обращения к MailHelper через ApplicationManager
+    public MailHelper mail() {
+        //инициализируем MailHelper только при первом обращении к этому методу
+        if (mailHelper == null) {
+            //передаем хелперу ссылку на ApplicationManager
+            // ApplicationManager нанимает помощника и передает ему ссылку на самого себя
+            mailHelper = new MailHelper(this);
+        }
+        return mailHelper;
     }
 
     //метод возвращает объект типа FtpHelper, для обращения к FtpHelper через ApplicationManager
