@@ -28,4 +28,9 @@ public class UserHelper extends HelperBase{
         type(By.name("password"), password);
         click(By.cssSelector("input[value=\"Login\"]"));
     }
+
+    public User getUserByIdFromBD(int id) {
+        Users users = app.db().getUsersFromBD();
+        return users.stream().filter((u) -> u.getId() == id).findFirst().get();
+    }
 }
