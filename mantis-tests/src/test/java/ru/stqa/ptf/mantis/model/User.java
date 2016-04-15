@@ -3,10 +3,14 @@ package ru.stqa.ptf.mantis.model;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * Created by Olga on 15.04.2016.
  */
+@Entity //сущность, для привязки к БД
+@Table(name = "mantis_user_table")
 public class User {
 
     @Column
@@ -81,5 +85,30 @@ public class User {
                 ", password='" + password + '\'' +
                 ", accessLevel=" + accessLevel +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (id != user.id) return false;
+        if (accessLevel != user.accessLevel) return false;
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        return password != null ? password.equals(user.password) : user.password == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + accessLevel;
+        return result;
     }
 }
