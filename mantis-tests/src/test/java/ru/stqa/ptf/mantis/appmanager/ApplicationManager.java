@@ -29,6 +29,9 @@ public class ApplicationManager {
     private MailHelper mailHelper;
     //создаем поле чтоб организовать ленивую инициализацию
     private DbHelper dbHelper;
+    //создаем поле чтоб организовать ленивую инициализацию
+    private UserHelper userHelper;
+    public NavigationHelper navigationHelper;
 
 
     public ApplicationManager(String browser) {
@@ -70,6 +73,19 @@ public class ApplicationManager {
         return dbHelper;
     }
 
+    public NavigationHelper getNavigationHelper() {
+        if (navigationHelper == null) {
+            navigationHelper = new NavigationHelper(this);
+        }
+        return navigationHelper;
+    }
+
+    public UserHelper getUserHelper() {
+        if (userHelper == null) {
+            userHelper = new UserHelper(this);
+        }
+        return userHelper;
+    }
     //метод возвращает объект типа RegistrationHelper, для обращения к RegistrationHelper через ApplicationManager
     public RegistrationHelper registration() {
         //инициализируем RegistrationHelper только при первом обращении к этому методу
