@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -13,23 +14,22 @@ import javax.persistence.Table;
 @Table(name = "mantis_user_table")
 public class User {
 
-    @Column
+    @Id
+    @Column(name = "id")
     private int id;
 
-    @Column
-    @Type(type = "text")
+    @Column(name = "username")
     private String username;
 
-    @Column
-    @Type(type = "text")
+    @Column(name = "email")
     private String email;
 
-    @Column
-    @Type(type = "text")
+    @Column(name = "password")
     private String password;
 
     @Column(name = "access_level")
-    private int accessLevel;
+    @Type(type = "short")
+    private short accessLevel;
 
     public int getId() {
         return id;
@@ -71,7 +71,7 @@ public class User {
         return accessLevel;
     }
 
-    public User setAccessLevel(int accessLevel) {
+    public User setAccessLevel(short accessLevel) {
         this.accessLevel = accessLevel;
         return this;
     }

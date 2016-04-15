@@ -27,6 +27,8 @@ public class ApplicationManager {
     private FtpHelper ftpHelper;
     //создаем поле чтоб организовать ленивую инициализацию
     private MailHelper mailHelper;
+    //создаем поле чтоб организовать ленивую инициализацию
+    private DbHelper dbHelper;
 
 
     public ApplicationManager(String browser) {
@@ -59,6 +61,13 @@ public class ApplicationManager {
     public String getProperty(String key) {
         //возвращаем значение св-ва из конфигурационного файла
         return properties.getProperty(key);
+    }
+
+    public DbHelper db() {
+        if (dbHelper == null) {
+            dbHelper = new DbHelper();
+        }
+        return dbHelper;
     }
 
     //метод возвращает объект типа RegistrationHelper, для обращения к RegistrationHelper через ApplicationManager
