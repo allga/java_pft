@@ -39,23 +39,12 @@ public class RegistrationTests extends TestBase {
         //ожидаем 2 письма в течении 10 сек
         List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
         //извлекаем конфирм ссылку из письма
-        String confirmationLink = findConfirmationLink(mailMessages, email);
+        String confirmationLink = app.mail().findConfirmationLink(mailMessages, email);
         //заканчиваем регистрацию с переходом по линке
         app.registration().finish(confirmationLink, password);
         //проверяем логин юзером
         assertTrue(app.newSession().login(user, password));
     }
-
-    private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
-        //из потока извлекаем объект письмо, у которого получатель - имейл юзера
-        MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
-        //для получения регулярного выражения подключаем зависимость от библиотеки verbalregex
-        //строим выражение, которое содержит "http://".а после него непробельные символы.один или больше
-        VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
-        //выбираем регулярным выражением ссылку из письма
-        return regex.getText(mailMessage.text);
-    }
-
 
     //останавливаем сервер в любом лучае, если даже тест упал
     @AfterMethod(alwaysRun = true)
