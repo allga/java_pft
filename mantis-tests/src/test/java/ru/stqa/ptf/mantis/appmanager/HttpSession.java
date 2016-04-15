@@ -80,4 +80,15 @@ public class HttpSession {
         return body.contains(String.format("<span class=\"italic\">%s</span>", username));
     }
 
+    public boolean goToManageUserPage() throws IOException {
+        if (isLoggedInAs("administrator")) {
+            //отправляем get запрос, чтоб перейти на /manage_user_page.php
+            HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/manage_user_page.php");
+            //получает ответ с html кодом страницы
+            CloseableHttpResponse response = httpclient.execute(get);
+            return true;
+        }
+        return false;
+    }
+
 }
