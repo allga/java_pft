@@ -31,7 +31,8 @@ public class ApplicationManager {
     private DbHelper dbHelper;
     //создаем поле чтоб организовать ленивую инициализацию
     private UserHelper userHelper;
-    public NavigationHelper navigationHelper;
+    private NavigationHelper navigationHelper;
+    private JamesHelper jamesHelper;
 
 
     public ApplicationManager(String browser) {
@@ -86,6 +87,15 @@ public class ApplicationManager {
         }
         return userHelper;
     }
+
+    public JamesHelper getJamesHelper() {
+        if (jamesHelper == null) {
+            jamesHelper = new JamesHelper(this);
+        }
+        return jamesHelper;
+    }
+
+
     //метод возвращает объект типа RegistrationHelper, для обращения к RegistrationHelper через ApplicationManager
     public RegistrationHelper registration() {
         //инициализируем RegistrationHelper только при первом обращении к этому методу
