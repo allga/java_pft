@@ -33,6 +33,7 @@ public class SoapTests extends TestBase{
         Issue issue = new Issue().setSummary("Test issue").
                 setDescription("Test issue description").setProject(projects.iterator().next());
         Issue created = app.getSoapHelper().addIssue(issue);
+        // сравниваем вновь созданный проект с существующим
         assertEquals(issue.getSummary(), created.getSummary());
     }
 }

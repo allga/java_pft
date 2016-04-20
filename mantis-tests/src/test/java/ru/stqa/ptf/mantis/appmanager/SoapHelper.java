@@ -44,16 +44,27 @@ public class SoapHelper {
     public Issue addIssue(Issue issue) throws MalformedURLException, ServiceException, RemoteException {
         //открываем соединение
         MantisConnectPortType mantisConnectPort = getMantisConnect();
+        //запрашиваем список возможных категорий багрепортов
+        String[] categories = mantisConnectPort.mc_project_get_categories("administrator", "root",
+                BigInteger.valueOf(issue.getProject().getId()));
         //из своего модельного объекта строим объект требуемой структуры
         IssueData issueData = new IssueData();
         //заполняем объект issueData
         issueData.setSummary(issue.getSummary());
         issueData.setDescription(issue.getDescription());
-        //ObjectRef - ссылка на проект, у него два параметра: ид и имя проекта 
+        //ObjectRef - ссылка на проект, у него два параметра: ид и имя проекта
         issueData.setProject(new ObjectRef(BigInteger.valueOf(issue.getProject().getId()), issue.getProject().getName()));
+        // устанавливаем обязательное поле Category, первую попавшуюся из списка категорий
+        issueData.setCategory(categories[0]);
         // передаем объект issueData в метод удаленного интерфейса
-        mantisConnectPort.mc_issue_add("administrator", "root", issueData);
-
-        return null;
+        BigInteger issueId = mantisConnectPort.mc_issue_add("administrator", "root", issueData);
+        //получаем объект типа IssueData, выполнив запрос:
+        IssueData createdIssueData = mantisConnectPort.mc_issue_get("administrator", "root", issueId);
+        //преобразуем объект типа IssueData в модельный объект
+        return new Issue().setId(createdIssueData.getId().intValue()).setSummary(createdIssueData.getSummary()).
+                setDescription(createdIssueData.getDescription()).
+                setProject(new Project().
+                        setId(createdIssueData.getProject().getId().intValue()).
+                        setName(createdIssueData.getProject().getName()));
     }
 }
