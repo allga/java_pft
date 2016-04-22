@@ -1,5 +1,6 @@
 package ru.stqa.ptf.mantis.tests;
 
+import org.testng.SkipException;
 import org.testng.annotations.Test;
 import ru.stqa.ptf.mantis.model.Issue;
 import ru.stqa.ptf.mantis.model.Project;
@@ -18,6 +19,11 @@ public class SoapTests extends TestBase{
 
     @Test
     public void testGetProjects() throws MalformedURLException, ServiceException, RemoteException {
+        try {
+            skipIfNotFixed(0000001);
+        } catch (SkipException e) {
+            e.printStackTrace();
+        }
         Set<Project> projects = app.getSoapHelper().getProjects();
         System.out.println(projects.size());
         for (Project project : projects) {
@@ -30,10 +36,10 @@ public class SoapTests extends TestBase{
         //получаем список проектов
         Set<Project> projects = app.getSoapHelper().getProjects();
         //создаем объект багрепорта
-        Issue issue = new Issue().setSummary("Test issue").
+        Issue issue = new Issue().setSummary("Test issue3").
                 setDescription("Test issue description").setProject(projects.iterator().next());
         Issue created = app.getSoapHelper().addIssue(issue);
-        // сравниваем вновь созданный проект с существующим
+        // сравниваем вновь созданный багрепорт с существующим
         assertEquals(issue.getSummary(), created.getSummary());
     }
 }
