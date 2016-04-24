@@ -34,6 +34,7 @@ public class ApplicationManager {
     private NavigationHelper navigationHelper;
     private JamesHelper jamesHelper;
     private SoapHelper soapHelper;
+    private BugifyHelper bugifyHelper;
 
 
     public ApplicationManager(String browser) {
@@ -103,6 +104,12 @@ public class ApplicationManager {
         return soapHelper;
     }
 
+    public BugifyHelper getBugifyHelper() {
+        if (bugifyHelper == null) {
+            bugifyHelper = new BugifyHelper(this);
+        }
+        return bugifyHelper;
+    }
 
     //метод возвращает объект типа RegistrationHelper, для обращения к RegistrationHelper через ApplicationManager
     public RegistrationHelper registration() {
