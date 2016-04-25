@@ -19,7 +19,7 @@ public class TestDistance {
         Assert.assertEquals(d, 119.0);
     }
 
-    @Test
+    @Test(enabled = false)
     public void testPointDistance() {
         Point p3 = new Point(-15, 65);
         Point p4 = new Point(33, -44);
